@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.menu_block {
+    margin-bottom: 5%;
+    display: flex;
+    position: relative;
+    z-index: 0;
+}
+
+
+
+.post img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+.text_left {
+    text-align: left;
+}
+.pink_container{
+    align-items: center;
+    width: 60%;
+    justify-content: left;
+}
+
+a {
+    text-decoration: none;
+}
+
+.comments {
+    margin-left: auto;
+    margin-right: auto;
+}
