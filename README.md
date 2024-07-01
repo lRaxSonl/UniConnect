@@ -5,7 +5,9 @@ UniConnect is a simple social network (small school project).
 Dependencies: Apache Freemarker, Spring Data JPA, Lombok, Spring Security, MariaDB Driver, Spring Web, Java Mail Sender.
 
 
-<img width="577" alt="opera_pNzDCBegR2" src="https://github.com/lRaxSonl/UniConnect/assets/124626560/7f32ce89-98de-464e-ab1d-fec69db7bde7">
+
+![opera_4LwBGdRgho](https://github.com/lRaxSonl/UniConnect/assets/124626560/5aa63b05-6bb9-436f-bdc5-f3794c387f7e)
+
 
 
 <h1><b>Project functionality</b></h1>
