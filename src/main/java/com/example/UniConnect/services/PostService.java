@@ -22,6 +22,7 @@ public class PostService {
     private final PostRepository postRepository;
     private final CommentRepository commentRepository;
     private final FavoriteRepository favoriteRepository;
+    private final UserService userService;
 
 
     //Список всех постов с учётом поиска по названию
@@ -43,7 +44,7 @@ public class PostService {
     //Удаление поста
     public void deletePost(Long id, User user) {
         try {
-            if (postRepository.findById(id).get().getUser().equals(user)) {
+            if (getPostById(id).getUser().equals(user) || userService.isAdmin(user)) {
 
                 List<Comment> commentList = getCommentsByPostId(id);
                 commentRepository.deleteAll(commentList);

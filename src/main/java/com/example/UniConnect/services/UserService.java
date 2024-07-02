@@ -23,17 +23,21 @@ public class UserService{
     private final SecurityConfig securityConfig;
 
     public boolean saveUser(User user) {
-        if (userRepository.findByUsername(user.getUsername()) != null) {
+        try {
+            if (userRepository.findByUsername(user.getUsername()) != null) {
+                return false;
+            }
+
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encodedPassword = passwordEncoder.encode(user.getPassword());
+            user.setPassword(encodedPassword);
+            userRepository.save(user);
+
+            log.info("Saving new user: {}", user);
+            return true;
+        }catch (IllegalAccessError e) {
             return false;
         }
-
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        userRepository.save(user);
-
-        log.info("Saving new user: {}", user);
-        return true;
     }
 
     public List<User> findAllUsers(){
@@ -74,9 +78,13 @@ public class UserService{
     }
 
     public boolean isAdmin(User user) {
-        if(findUserById(user.getId()).getRole().equals(Roles.ADMIN)) {
-            return true;
-        }else {
+        try {
+            if (findUserById(user.getId()).getRole().equals(Roles.ADMIN)) {
+                return true;
+            } else {
+                return false;
+            }
+        }catch (NullPointerException e) {
             return false;
         }
     }

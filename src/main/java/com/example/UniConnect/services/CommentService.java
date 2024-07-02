@@ -3,6 +3,7 @@ package com.example.UniConnect.services;
 import com.example.UniConnect.interfaces.CommentRepository;
 import com.example.UniConnect.models.Comment;
 import com.example.UniConnect.models.Post;
+import com.example.UniConnect.models.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,8 @@ public class CommentService {
 
     public void deleteComment(Long id) {
         Comment comment = commentRepository.findById(id).get();
-        if(comment.getUser().equals(userService.getCurrentUser())) {
+        User user = userService.getCurrentUser();
+        if(comment.getUser().equals(user) || userService.isAdmin(user)) {
             commentRepository.deleteById(id);
         }else {
             log.info("Access is denied");

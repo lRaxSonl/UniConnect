@@ -53,7 +53,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth ->
                                 auth.requestMatchers("post/create", "post/create-now", "/post/comment-create", "/post/delete/*",
                                         "/post/delete/*", "/post/favorites", "/post/favorite-create", "/post/comment/delete/*").authenticated()
-                                        .requestMatchers("/admin").hasAnyRole("USER")
+                                        .requestMatchers("/admin").hasAnyRole("ADMIN")
                                         .anyRequest().permitAll()
                 )
 
