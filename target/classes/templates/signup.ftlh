@@ -96,7 +96,7 @@
         }
     </style>
 
-<form action="/registration-now" method="post">
+<form action="/auth/registration-now" method="post">
     <h2>Registration</h2>
     <label for="username">Username:</label>
     <input type="text" id="username" name="username">

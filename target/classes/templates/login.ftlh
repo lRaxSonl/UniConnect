@@ -95,7 +95,7 @@
         }
     </style>
 
-<form action="/login-now" method="post">
+<form action="/auth/login-now" method="post">
     <h2>Login</h2>
     <label for="username">Username:</label>
     <input type="text" id="username" name="username">

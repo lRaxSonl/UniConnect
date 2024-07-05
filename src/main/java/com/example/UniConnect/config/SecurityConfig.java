@@ -1,9 +1,7 @@
 
 package com.example.UniConnect.config;
 
-import com.example.UniConnect.enums.Roles;
 import com.example.UniConnect.services.CustomUserDetailsService;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -49,18 +47,18 @@ public class SecurityConfig {
     public SecurityFilterChain SecurityFilterChain(HttpSecurity http) throws Exception {
         http.authenticationProvider(daoAuthenticationProvider());
 
-        http.csrf((csrf -> csrf.disable()))
+        http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth ->
                                 auth.requestMatchers("post/create", "post/create-now", "/post/comment-create", "/post/delete/*",
                                         "/post/delete/*", "/post/favorites", "/post/favorite-create", "/post/comment/delete/*").authenticated()
-                                        .requestMatchers("/admin").hasAnyRole("ADMIN")
+                                        .requestMatchers("/admin", "/admin/*").hasAnyRole("ADMIN")
                                         .anyRequest().permitAll()
                 )
 
                 .formLogin(login ->
                         login.usernameParameter("username")
                                 .loginPage("/login")
-                                .loginProcessingUrl("/login-now")
+                                .loginProcessingUrl("/auth/login-now")
                                 .defaultSuccessUrl("/")
                                 .permitAll()
                 )

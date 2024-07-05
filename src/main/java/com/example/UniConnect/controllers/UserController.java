@@ -4,6 +4,7 @@ import com.example.UniConnect.models.User;
 import com.example.UniConnect.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -14,7 +15,8 @@ public class UserController {
 
 
     @GetMapping("/registration")
-    public String viewRegistrationPage() {
+    public String viewRegistrationPage(Model model) {
+        model.addAttribute("title", "Registration");
         if (userService.isAuthorized()){
             return "redirect:/";
         } else {
@@ -22,14 +24,15 @@ public class UserController {
         }
     }
 
-    @PostMapping("/registration-now")
+    @PostMapping("/auth/registration-now")
     public String registrationProcess(User user) {
         userService.saveUser(user);
         return "redirect:/";
     }
 
     @GetMapping("/login")
-    public String viewLoginPage(){
+    public String viewLoginPage(Model model){
+        model.addAttribute("title", "Login");
         if (userService.isAuthorized()) {
             return "redirect:/";
         }else {
@@ -37,7 +40,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/login-now")
+    @PostMapping("/auth/login-now")
     public String loginNow(User user){
         return "redirect:/";
     }

@@ -1,7 +1,6 @@
 package com.example.UniConnect.controllers;
 
 import com.example.UniConnect.config.SecurityConfig;
-import com.example.UniConnect.interfaces.UserRepository;
 import com.example.UniConnect.models.Post;
 import com.example.UniConnect.models.User;
 import com.example.UniConnect.services.CommentService;
@@ -28,7 +27,6 @@ import java.util.UUID;
 public class PostController {
     private final PostService postService;
     private final CommentService commentService;
-    private final UserRepository userRepository;
     private final UserService userService;
 
     @Autowired
@@ -41,7 +39,8 @@ public class PostController {
     }
 
     @GetMapping("/post/create")
-    public String createPost() {
+    public String createPost(Model model) {
+        model.addAttribute("title", "Create post");
         return "create-post";
     }
 

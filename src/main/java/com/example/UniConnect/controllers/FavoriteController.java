@@ -17,6 +17,7 @@ public class FavoriteController {
     @GetMapping("/post/favorites")
     public String viewFavoritePage(Model model) {
         model.addAttribute("favorites", favoriteService.getFavoritesList());
+        model.addAttribute("title", "Favorites");
         return "favorite-post";
     }
 
